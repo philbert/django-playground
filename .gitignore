@@ -1,0 +1,10 @@
+*.pyc
+*.pyo
+*.pyd
+*.so
+__pycache__/
+.tox/
+.cache
+.coverage
+.ropeproject
+db.sqlite3
