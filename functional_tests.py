@@ -30,6 +30,10 @@ class NewVisitorTest(unittest.TestCase):
 
         # She types "buy peacock feathers" into a text box (Edith's hobby
         # is tying gly-fishing lures)
+        inputbox.send_keys('Buy peacock feathers')
+
+        # When she hits enter, the page, update, and now the page lists
+        # "1: Buy peacock feather" as an item in a to-do list
         inputbox.send_keys(Keys.ENTER)
 
         table = self.browser.find_element_by_id('id_list_table')
@@ -39,12 +43,9 @@ class NewVisitorTest(unittest.TestCase):
             "New to-do item did not appear in table"
         )
 
-        # When she hits enter, the page, update, and now the page lists
-        # "1: Buy peacock feather" as an item in a to-do list
-        self.fail('Finish the test!')
-
         # There is a still a text box inviting her to add another item.
         # She enters "Use peacock feathers to make a fly"
+        self.fail('Finish the test!')
 
         # The page updates again, and now shows both itmes on her list
 
