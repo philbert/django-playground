@@ -1,0 +1,56 @@
+---
+  - name: setup application directory structure
+    file: path="{{ item }}" state=directory
+    with_items:
+      - ~/sites/production.philbert.io/database
+      - "{{ source_path }}"
+      - ~/sites/production.philbert.io/static
+      - "{{ virtualenv_path }}"
+    sudo_user: centos
+
+  - name: clone code
+    git: 
+      repo: https://github.com/philbert/django-playground.git
+      dest: "{{ source_path }}"
+      update: yes
+      force: yes
+    sudo_user: centos
+
+  - name: check if our virtualenv has already been created
+    stat: path="{{ virtualenv_path }}/bin"
+    register: created
+
+    # need a better way to do this
+  - name: setup virtualenv
+    shell: virtualenv --python=python3.4 "{{ virtualenv_path }}"
+    sudo_user: centos
+    when: created.stat.isdir is defined and created.stat.isdir
+
+  - name: install app requirements.txt
+    pip:
+      virtualenv: "{{ virtualenv_path }}"
+      requirements: "{{ source_path }}/requirements.txt"
+    sudo_user: centos
+
+  - name: Run Django database migrations
+    django_manage:
+      command: migrate
+      app_path: "{{ source_path }}"
+      virtualenv: "{{ virtualenv_path }}"
+    sudo_user: centos
+
+  - name: Run Django collectstatic
+    django_manage:
+      command: collectstatic
+      app_path: "{{ source_path }}"
+      virtualenv: "{{ virtualenv_path }}"
+    sudo_user: centos
+
+  - name: switch off django debug
+    lineinfile: 
+      dest: "{{ source_path }}/superlists/settings.py"
+      regexp: "{{ item.regexp }}"
+      line: "{{ item.line }}"
+    with_items: 
+      - {regexp: "^ALLOWED_HOSTS\ =.*", line: "ALLOWED_HOSTS = ['production.philbert.io']"}
+      - { regexp: "^DEBUG\ =.*", line: "DEBUG = False" }

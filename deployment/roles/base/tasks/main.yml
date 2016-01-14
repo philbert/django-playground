@@ -1,0 +1,21 @@
+---
+  - name: update everything
+    yum: name=* state=latest
+
+  - name: install epel
+    yum: name={{ item }}
+    with_items: 
+      - epel-release
+
+  - name: install pip 
+    yum: name={{ item }}
+    with_items: 
+      - python-pip
+      - nginx
+      - git
+      - python34
+      - tree
+      - vim
+
+  - name: install virtualenv
+    pip: name=virtualenv

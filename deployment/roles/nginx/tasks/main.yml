@@ -1,0 +1,19 @@
+---
+  - name: setup nginx.conf
+    template: 
+      src: nginx.conf.j2
+      dest: /etc/nginx/nginx.conf
+      owner: root
+      group: root
+      mode: 644
+
+  - debug: msg="BAD HORRIBLE INSECURE HACK"
+
+  - name: add nginx user to centos
+    user: user=nginx group=centos append=yes
+
+  - name: add read permissions to django user
+    file: path=/home/centos mode=710 state=directory
+
+  - name: enable nginx
+    service: name=nginx enabled=yes state=started

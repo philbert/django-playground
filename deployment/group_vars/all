@@ -1,0 +1,7 @@
+---
+project_path: /home/centos/sites/production.philbert.io
+source_path: /home/centos/sites/production.philbert.io/source
+virtualenv_path: /home/centos/sites/production.philbert.io/virtualenv
+django_user: centos
+
+
