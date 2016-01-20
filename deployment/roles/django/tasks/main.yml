@@ -15,6 +15,7 @@
       update: yes
       force: yes
     sudo_user: centos
+    notify: restart gunicorn
 
   - name: check if our virtualenv has already been created
     stat: path="{{ virtualenv_path }}/bin"
