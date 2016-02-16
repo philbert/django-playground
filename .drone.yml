@@ -3,10 +3,4 @@ build:
     commands:
         - sudo pip install -r requirements.txt
         - xvfb-run python manage.py test lists
-    environment:
-        - DB_NAME=postgres
-		- DB_USER=postgres
-		- DB_PASS=postgres
-		- DB_SERVICE=postgres
-		- DB_PORT=5432
 
