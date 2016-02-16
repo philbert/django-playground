@@ -1,13 +1,12 @@
 build:
-    image: bradrydzewski/python:3.3
+    image: python:3.5-onbuild
     commands:
-        - source /home/ubuntu/virtualenv/python3.3/bin/activate
         - whoami
         - which python
         - python --version
         - echo $VIRTUAL_ENV
         - echo $PATH
         - env
-        - sudo pip install -r requirements.txt
-        - xvfb-run python manage.py test lists
+        - pip install -r requirements.txt
+        - python manage.py test lists
 
