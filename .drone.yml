@@ -1,8 +1,13 @@
 build:
     image: bradrydzewski/python:3.3
     commands:
+        - whoami
         - which python
         - python --version
+        - echo $VIRTUAL_ENV
+        - echo $PATH
+        - pwd
+        - env
         - sudo pip install -r requirements.txt
         - xvfb-run python manage.py test lists
 
