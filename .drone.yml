@@ -1,6 +1,8 @@
 build:
     image: bradrydzewski/python:3.3
     commands:
+        - which python
+        - python --version
         - sudo pip install -r requirements.txt
-        - xvfb-run python3 manage.py test lists
+        - xvfb-run python manage.py test lists
 
