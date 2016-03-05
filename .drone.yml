@@ -1,6 +1,8 @@
 build:
     image: python:3.5-onbuild
     commands:
+        - apt-get update
+        - apt-get install iceweasel -y
         - pip install -r requirements.txt
         - python manage.py test lists
         - python manage.py test functional_tests
