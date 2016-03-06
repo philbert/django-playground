@@ -26,22 +26,22 @@ SECRET_KEY = 'yw6(qf)*^#del0c6&pk!&n+$p8#d^#p$-=^ud13mjbrb%3f=%f'
 # Here is a safer way to create a secure key but need proper
 # environment setup first.
 # https://github.com/ndarville/pony-forum/blob/5d68f76d47360a39c1ed25b68b2dcf06119052dc/ponyforum/settings.py
-try:
-    SECRET_KEY
-except NameError:
-    SECRET_FILE = os.path.join(PROJECT_PATH, 'secret.txt')
-    try:
-        SECRET_KEY = open(SECRET_FILE).read().strip()
-    except IOError:
-        try:
-            import random
-            SECRET_KEY = ''.join([random.SystemRandom().choice('abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)') for i in range(50)])
-            secret = file(SECRET_FILE, 'w')
-            secret.write(SECRET_KEY)
-            secret.close()
-        except IOError:
-            Exception('Please create a %s file with random characters \
-            to generate your secret key!' % SECRET_FILE)
+#try:
+#    SECRET_KEY
+#except NameError:
+#    SECRET_FILE = os.path.join(PROJECT_PATH, 'secret.txt')
+#    try:
+#        SECRET_KEY = open(SECRET_FILE).read().strip()
+#    except IOError:
+#        try:
+#            import random
+#            SECRET_KEY = ''.join([random.SystemRandom().choice('abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)') for i in range(50)])
+#            secret = file(SECRET_FILE, 'w')
+#            secret.write(SECRET_KEY)
+#            secret.close()
+#        except IOError:
+#            Exception('Please create a %s file with random characters \
+#            to generate your secret key!' % SECRET_FILE)
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -53,7 +53,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    #'django.contrib.admin',
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
