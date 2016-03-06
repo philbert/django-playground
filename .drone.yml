@@ -5,5 +5,6 @@ build:
         - apt-get install iceweasel xvfb -y
         - pip install -r requirements.txt
         - python manage.py test lists
+        - python manage.py test blog
         - xvfb-run python manage.py test functional_tests
 
