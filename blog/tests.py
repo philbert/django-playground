@@ -16,3 +16,11 @@ class EntryModelTest(TestCase):
     def test_verbose_name_plural(self):
         """ is this a setup? """
         self.assertEqual(str(Entry._meta.verbose_name_plural), "entries")
+
+class ProjectTests(TestCase):
+    """ some more tests """
+
+    def test_blog_homepage(self):
+        """ deviating from the example had to happen """
+        response = self.client.get('/blog/')
+        self.assertEqual(response.status_code, 200)

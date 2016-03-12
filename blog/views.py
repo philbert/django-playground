@@ -1,3 +1,6 @@
-from django.shortcuts import render
+""" a new view for a new day """
+from django.views.generic.base import TemplateView
 
-# Create your views here.
+class HomeView(TemplateView):
+    """ not home but actually /blog/ """
+    template_name = 'blog.html'
