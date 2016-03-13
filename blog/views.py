@@ -1,6 +1,10 @@
 """ a new view for a new day """
-from django.views.generic.base import TemplateView
+from django.views.generic import ListView
 
-class HomeView(TemplateView):
+from blog.models import Entry
+
+
+class HomeView(ListView):
     """ not home but actually /blog/ """
     template_name = 'blog.html'
+    queryset = Entry.objects.order_by('-created_at')
