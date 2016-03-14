@@ -19,5 +19,5 @@ from blog import views
 
 urlpatterns = [
     url(r'^$', views.HomeView.as_view(), name='blog_home'),
-    url(r'^blog/(?P<pk>\d+)/$', views.HomeView.as_view(), name='entry_detail'),
+    url(r'^(?P<pk>\d+)/$', views.EntryDetail.as_view(), name='entry_detail'),
 ]
