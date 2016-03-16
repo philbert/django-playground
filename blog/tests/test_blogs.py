@@ -80,3 +80,8 @@ class EntryViewTest(TestCase):
         """ test body in entry """
         response = self.client.get(self.entry.get_absolute_url())
         self.assertContains(response, self.entry.body)
+
+    def test_no_comments(self):
+        """ perhaps not worth having a separate test_comments.py """
+        response = self.client.get(self.entry.get_absolute_url())
+        self.assertContains(response, "No comments yet")
