@@ -10,4 +10,9 @@
   {% empty %}
     No comments yet.
   {% endfor %}
+  <h5>Add and comment</h5>
+  <form method="post">
+    {{ form.as_table }}
+    <input type="submit" value="Create Comment">
+  </form>
 {% endblock %}

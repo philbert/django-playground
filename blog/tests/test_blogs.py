@@ -3,6 +3,7 @@ testcases for blog
 """
 from django.test import TestCase
 from django.contrib.auth import get_user_model
+from django_webtest import WebTest
 
 from blog.models import Entry
 
@@ -58,7 +59,7 @@ class HomePageTests(TestCase):
         response = self.client.get('/blog/')
         self.assertContains(response, 'No blog entries yet.')
 
-class EntryViewTest(TestCase):
+class EntryViewTest(WebTest):
     """ create new blog post test """
 
     def setUp(self):
@@ -85,3 +86,8 @@ class EntryViewTest(TestCase):
         """ perhaps not worth having a separate test_comments.py """
         response = self.client.get(self.entry.get_absolute_url())
         self.assertContains(response, "No comments yet")
+
+    def test_view_page(self):
+        """ this test requires form submission so we use WebTest """
+        page = self.app.get(self.entry.get_absolute_url())
+        self.assertEqual(len(page.forms), 1)
