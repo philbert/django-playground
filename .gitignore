@@ -9,3 +9,4 @@ __pycache__/
 .ropeproject
 db.sqlite3
 htmlcov
+.env
