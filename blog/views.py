@@ -23,6 +23,11 @@ class EntryDetail(CreateView):
         return kwargs
 
     def get_context_data(self, **kwargs):
+        """ get context data """
         data = super().get_context_data(**kwargs)
         data['entry'] = self.get_object()
         return data
+
+    def get_success_url(self):
+        """ return absolute url on success """
+        return self.get_object().get_absolute_url()

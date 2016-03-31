@@ -91,3 +91,19 @@ class EntryViewTest(WebTest):
         """ this test requires form submission so we use WebTest """
         page = self.app.get(self.entry.get_absolute_url())
         self.assertEqual(len(page.forms), 1)
+
+    def test_form_error(self):
+        """ test form submission without contents """
+        page = self.app.get(self.entry.get_absolute_url())
+        page = page.form.submit()
+        self.assertContains(page, "This field is required.")
+
+    def test_form_success(self):
+        """ test form submission with contents """
+        page = self.app.get(self.entry.get_absolute_url())
+        page.form['name'] = "Billy Bob"
+        page.form['email'] = "bill@example.com"
+        page.form['body'] = "Test comment body."
+        page = page.form.submit()
+        self.assertRedirects(page, self.entry.get_absolute_url())
+
