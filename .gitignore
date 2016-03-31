@@ -8,3 +8,4 @@ __pycache__/
 .coverage
 .ropeproject
 db.sqlite3
+htmlcov
