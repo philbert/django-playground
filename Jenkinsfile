@@ -1,11 +1,12 @@
 stage "check"
 docker.image('python:3.5-onbuild').inside {
     sh "env"
+    sh "whoami"
 }
 
 stage "update"
 docker.image('python:3.5-onbuild').inside {
-    update: { sh "sudo apt-get update -y" }
+    update: { sh "apt-get update -y" }
 }
 
 stage "install dependencies"
