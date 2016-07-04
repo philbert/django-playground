@@ -3,6 +3,11 @@ docker.image('philbert/python3.5').inside {
     sh "env"
 }
 
+stage "git clone"
+docker.image('philbert/python3.5').inside {
+    git url: "https://github.com/philbert/django-playground.git"
+}
+
 stage "unit tests"
 docker.image('philbert/python3.5').inside {
     lists: { sh "python manage.py test lists" }
