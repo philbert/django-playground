@@ -1,5 +1,4 @@
 #!groovy
-
 docker.image('philbert/django1.8:latest').inside {
     stage "checkout"
     // if this is necessary then I should just run a test container
@@ -12,7 +11,6 @@ docker.image('philbert/django1.8:latest').inside {
     lists: { sh "coverage run --source='.' manage.py test lists" }
     report: { sh "coverage xml -o reports/lists_cov.xml" }
     report: { sh "coverage report" }
-    //step([$class: 'JUnitResultArchiver', testResults: '**/reports/coverage.xml'])
 
     stage "unit test blog"
     blog: { sh "coverage run --source='.' manage.py test blog" }
@@ -21,5 +19,17 @@ docker.image('philbert/django1.8:latest').inside {
 
     stage "functional tests"
     selenium: { sh "xvfb-run python manage.py test functional_tests" }
+
 }
 
+// this is a bit silly
+node('master') {
+    stage "build container"
+    checkout scm
+    def image = docker.build "philbert/django-webapp:0.1.${env.BUILD_NUMBER}"
+
+    stage "publish"
+    docker.withRegistry("https://quay.io/v1", "quay-credentials") {
+        image.push()
+    }
+}

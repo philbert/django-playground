@@ -1,7 +1,7 @@
 FROM python:3.5-onbuild
 
 RUN apt-get update 
-RUN apt-get install -y sudo iceweasel xvfb
+RUN apt-get install -y sudo iceweasel xvfb --fix-missing
 RUN rm -rf /var/lib/apt/lists/*
 
 ARG user=jenkins
