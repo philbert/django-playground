@@ -22,6 +22,7 @@ docker.image('philbert/django1.8:latest').inside {
 
 }
 
+// test push
 // this is a bit silly
 node('master') {
     stage "build container"
