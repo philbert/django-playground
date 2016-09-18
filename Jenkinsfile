@@ -26,7 +26,7 @@ docker.image('philbert/django1.8:latest').inside {
 node('master') {
     stage "build container"
     checkout scm
-    def image = docker.build "philbert/django-webapp:0.1.${env.BUILD_NUMBER}"
+    def image = docker.build "philbert/django-webapp:0.1.demo"
 
     stage "publish"
     docker.withRegistry("https://quay.io/v1", "quay-credentials") {
