@@ -1,0 +1,13 @@
+---
+  - name: copy selinux rules to current dir
+    copy: src=selinux_allow dest=./
+
+  - name: convert selinux rules to policy with audit2allow
+    shell: audit2allow -a -M selinux_allow
+
+  - name: apply selinux rules
+    shell: semodule -i selinux_allow.pp
+
+  - name: Grant Nginx permissions to proxy requests to an upstream
+    #shell: setsebool httpd_can_network_connect on -P
+    shell: setsebool -P httpd_read_user_content 1

@@ -1,0 +1,22 @@
+---
+  - name: create log and pid directories for gunicorn
+    file: 
+      path: "{{ item }}"
+      owner: "{{ django_user }}"
+      group: "{{ django_user }}"
+      mode: 755
+      state: directory
+    with_items:
+      - /var/log/gunicorn
+      - /run/gunicorn
+
+  - name: add gunicorn systemd service
+    template: src=gunicorn.service dest=/usr/lib/systemd/system/gunicorn.service
+
+  - name: enable gunicorn service and socket
+    service: name={{ item }} enabled=yes state=started
+    with_items:
+      - gunicorn.service
+
+  - name: another horrible hack
+    shell: curl http://production.philbert.io

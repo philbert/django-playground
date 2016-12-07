@@ -1,0 +1,9 @@
+---
+  - hosts: django
+    roles:
+      - base
+      - django
+      - nginx
+      - gunicorn
+      - selinux
+    sudo: yes
